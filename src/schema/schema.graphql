@@ -1,0 +1,31 @@
+ type Query {
+  """ Get list all users """
+  users: [User!]!
+  """ Login """
+  login(email: String!, password: String!): User!
+  """ Get more user information """
+  me: User!
+}
+
+type Mutation {
+  """ Register user"""
+  register(user: UserInput): User!
+}
+
+""" Types Query """
+type User {
+  id: ID!
+  name: String!
+  lastName: String!
+  email: String!
+  password: String
+  date: String
+}
+
+""" Types Mutations """
+input UserInput {
+  name: String!
+  lastName: String!
+  email: String!
+  password: String!
+}
