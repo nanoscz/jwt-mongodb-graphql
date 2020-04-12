@@ -2,7 +2,7 @@
   """ Get list all users """
   users: [User!]!
   """ Login """
-  login(email: String!, password: String!): User!
+  login(email: String!, password: String!): ResultUser!
   """ Get more user information """
   me: User!
 }
