@@ -15,13 +15,11 @@ if (process.env.NODE_ENV !== 'production') {
 
 async function init() {
   const app = express();
-
   app.use('*', cors());
-
   app.use(compression());
 
   const database = new Database();
-  const db = database.init();
+  const db = await database.init();
 
   const context = async({ req, connection }: any) => {
     return { db };
