@@ -1,5 +1,6 @@
 import { IResolvers } from 'graphql-tools';
 import { Datetime } from '../lib/datetime';
+import { returnResultUser } from '../lib/utils';
 
 const mutation: IResolvers = {
   Mutation: {
@@ -13,18 +14,10 @@ const mutation: IResolvers = {
       user.date = new Datetime().getCurrentDateTime();
       return db.collection('users').insertOne(user)
         .then((data: any) => {
-          return {
-            user,
-            status: true,
-            message: 'successful register',
-          };
+          return returnResultUser(user, true, 'successful register.');
         })
         .catch((err: any) => {
-          return {
-            status: false,
-            message: 'register failed.',
-            user: null,
-          };
+          return returnResultUser(null, false, 'register failed.');
         });
     },
   },
