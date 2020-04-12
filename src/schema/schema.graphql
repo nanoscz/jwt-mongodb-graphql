@@ -9,7 +9,7 @@
 
 type Mutation {
   """ Register user"""
-  register(user: UserInput): User!
+  register(user: UserInput): ResultUSer!
 }
 
 """ Types Query """
@@ -28,4 +28,10 @@ input UserInput {
   lastName: String!
   email: String!
   password: String!
+}
+
+type ResultUSer {
+  status: Boolean!
+  message: String!
+  user: User
 }
