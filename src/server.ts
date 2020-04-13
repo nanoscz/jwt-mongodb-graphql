@@ -10,7 +10,7 @@ import chalk from 'chalk';
 
 if (process.env.NODE_ENV !== 'production') {
   const envs = environments;
-  console.log(envs);
+  // console.log(envs);
 }
 
 async function init() {
@@ -22,7 +22,8 @@ async function init() {
   const db = await database.init();
 
   const context = async({ req, connection }: any) => {
-    return { db };
+    const token = req ? req.headers.authorization : connection.authorization;
+    return { db, token };
   };
 
   const server = new ApolloServer({
