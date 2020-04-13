@@ -2,9 +2,9 @@
   """ Get list all users """
   users: [User!]!
   """ Login """
-  login(email: String!, password: String!): ResultUser!
+  login(email: String!, password: String!): ResultToken!
   """ Get more user information """
-  me: User!
+  me: ResultUser!
 }
 
 type Mutation {
@@ -34,4 +34,10 @@ type ResultUser {
   status: Boolean!
   message: String!
   user: User
+}
+
+type ResultToken {
+  message: String!
+  status: Boolean!
+  token: String
 }
