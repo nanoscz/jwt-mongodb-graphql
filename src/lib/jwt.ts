@@ -6,7 +6,6 @@ class JWT {
   private secretKey = SECRET_KEY as string;
 
   sign(data: any): string {
-    console.log("data", data)
     return jwt.sign({ user: data.user }, this.secretKey, { expiresIn: 24 * 60 * 60 });
   }
 
