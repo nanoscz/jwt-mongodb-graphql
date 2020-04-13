@@ -1,6 +1,7 @@
 import { IResolvers } from 'graphql-tools';
 import { Datetime } from '../lib/datetime';
 import { returnResultUser } from '../lib/utils';
+import bcryptjs from 'bcryptjs';
 
 const mutation: IResolvers = {
   Mutation: {
@@ -11,7 +12,11 @@ const mutation: IResolvers = {
       } else {
         user.id = lastUser[0].id + 1;
       }
+      const salt = await bcryptjs.genSalt(10);
+      const password = await bcryptjs.hashSync(user.password, salt);
+      user.password = password;
       user.date = new Datetime().getCurrentDateTime();
+
       return db.collection('users').insertOne(user)
         .then((data: any) => {
           return returnResultUser(user, true, 'successful register.');
